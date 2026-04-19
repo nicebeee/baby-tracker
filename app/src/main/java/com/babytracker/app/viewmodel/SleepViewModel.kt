@@ -2,10 +2,13 @@ package com.babytracker.app.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.babytracker.app.data.database.AppDatabase
 import com.babytracker.app.data.entities.SleepSession
 import com.babytracker.app.data.repository.AppRepository
+import com.babytracker.app.service.TimerService
 import kotlinx.coroutines.launch
 
 class SleepViewModel(app: Application) : AndroidViewModel(app) {
@@ -28,7 +31,6 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
         repo = AppRepository(db.feedingDao(), db.sleepDao(), db.weightDao(), db.diaperDao())
         sessions = repo.allSleeps
 
-        // Восстанавливаем таймер если приложение было закрыто
         val savedStart = prefs.getLong(KEY_START, 0L)
         if (savedStart > 0L) {
             startTimeMillis = savedStart
@@ -42,6 +44,7 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().putLong(KEY_START, startTimeMillis).apply()
         _isRunning.value = true
         tickTimer()
+        startService()
     }
 
     private fun tickTimer() {
@@ -58,9 +61,26 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().remove(KEY_START).apply()
         _isRunning.value = false
         _elapsedMillis.value = 0L
+        stopService()
         viewModelScope.launch {
             repo.insertSleep(SleepSession(startTime = startTimeMillis, endTime = endTime))
         }
+    }
+
+    private fun startService() {
+        val intent = Intent(getApplication(), TimerService::class.java).apply {
+            action = TimerService.ACTION_START
+            putExtra(TimerService.EXTRA_TYPE, TimerService.TYPE_SLEEP)
+            putExtra(TimerService.EXTRA_START_TIME, startTimeMillis)
+        }
+        ContextCompat.startForegroundService(getApplication(), intent)
+    }
+
+    private fun stopService() {
+        val intent = Intent(getApplication(), TimerService::class.java).apply {
+            action = TimerService.ACTION_STOP
+        }
+        getApplication<Application>().startService(intent)
     }
 
     fun addManual(startTime: Long, endTime: Long, note: String) {
