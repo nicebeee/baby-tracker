@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/feedingFragment"
+        android:icon="@drawable/ic_feeding"
+        android:title="@string/tab_feeding" />
+
+    <item
+        android:id="@+id/sleepFragment"
+        android:icon="@drawable/ic_sleep"
+        android:title="@string/tab_sleep" />
+
+    <item
+        android:id="@+id/weightFragment"
+        android:icon="@drawable/ic_weight"
+        android:title="@string/tab_weight" />
+
+    <item
+        android:id="@+id/diaperFragment"
+        android:icon="@drawable/ic_diaper"
+        android:title="@string/tab_diaper" />
+
+</menu>

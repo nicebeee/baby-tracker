@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Дневник малыша</string>
+
+    <!-- Tabs -->
+    <string name="tab_feeding">Кормление</string>
+    <string name="tab_sleep">Сон</string>
+    <string name="tab_weight">Вес</string>
+    <string name="tab_diaper">Подгузник</string>
+
+    <!-- Feeding -->
+    <string name="start_feeding">Начать кормление</string>
+    <string name="stop_feeding">Завершить кормление</string>
+
+    <!-- Sleep -->
+    <string name="start_sleep">Начать сон</string>
+    <string name="stop_sleep">Завершить сон</string>
+
+    <!-- Common -->
+    <string name="add_manual">+ Добавить вручную</string>
+    <string name="history">История</string>
+    <string name="add_session">Добавить запись</string>
+    <string name="edit_session">Редактировать запись</string>
+    <string name="select_start_time">Выбрать время начала</string>
+    <string name="select_end_time">Выбрать время конца</string>
+    <string name="note">Заметка</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="edit">Изменить</string>
+    <string name="delete">Удалить</string>
+    <string name="delete_confirm_title">Удалить запись?</string>
+    <string name="delete_confirm_message">Это действие нельзя отменить.</string>
+
+    <!-- Weight -->
+    <string name="add_weight">Добавить вес</string>
+    <string name="edit_weight">Редактировать вес</string>
+    <string name="select_date">Выбрать дату</string>
+    <string name="weight_kg">Вес (кг)</string>
+    <string name="invalid_weight">Введите корректное значение веса</string>
+
+    <!-- Diaper -->
+    <string name="add_diaper">Добавить подгузник</string>
+    <string name="edit_diaper">Редактировать подгузник</string>
+    <string name="select_datetime">Выбрать дату и время</string>
+    <string name="diaper_type">Тип подгузника</string>
+    <string name="diaper_wet">Мокрый</string>
+    <string name="diaper_dirty">Грязный</string>
+    <string name="diaper_both">Оба</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/feedingFragment">
+
+    <fragment
+        android:id="@+id/feedingFragment"
+        android:name="com.babytracker.app.ui.feeding.FeedingFragment"
+        android:label="@string/tab_feeding" />
+
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.babytracker.app.ui.sleep.SleepFragment"
+        android:label="@string/tab_sleep" />
+
+    <fragment
+        android:id="@+id/weightFragment"
+        android:name="com.babytracker.app.ui.weight.WeightFragment"
+        android:label="@string/tab_weight" />
+
+    <fragment
+        android:id="@+id/diaperFragment"
+        android:name="com.babytracker.app.ui.diaper.DiaperFragment"
+        android:label="@string/tab_diaper" />
+
+</navigation>

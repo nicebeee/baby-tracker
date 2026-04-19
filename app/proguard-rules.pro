@@ -1,0 +1,2 @@
+-keep class com.babytracker.app.data.entities.** { *; }
+-keep class com.github.mikephil.charting.** { *; }
