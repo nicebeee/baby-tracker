@@ -36,8 +36,9 @@ class SleepFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        viewModel.sessions.observe(viewLifecycleOwner) {
-            adapter.submitList(SleepAdapter.buildGroupedList(it))
+        viewModel.sessions.observe(viewLifecycleOwner) { sessions ->
+            adapter.submitList(SleepAdapter.buildGroupedList(sessions))
+            updateTodayStats(sessions)
         }
 
         viewModel.isRunning.observe(viewLifecycleOwner) { running ->
@@ -91,6 +92,23 @@ class SleepFragment : Fragment() {
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    private fun updateTodayStats(sessions: List<com.babytracker.app.data.entities.SleepSession>) {
+        val todayStart = com.babytracker.app.viewmodel.StatisticsViewModel.startOfDay(System.currentTimeMillis())
+        val todaySessions = sessions.filter { it.startTime >= todayStart }
+        val count = todaySessions.size
+        val totalMs = todaySessions.sumOf { it.endTime - it.startTime }
+        val statsView = binding.todayStats
+        statsView.findViewById<android.widget.TextView>(com.babytracker.app.R.id.tv_today_count).text = "$count раз"
+        statsView.findViewById<android.widget.TextView>(com.babytracker.app.R.id.tv_today_duration).text =
+            formatDur(totalMs)
+    }
+
+    private fun formatDur(ms: Long): String {
+        if (ms <= 0) return "0 мин"
+        val h = ms / 3_600_000; val m = (ms % 3_600_000) / 60_000
+        return if (h > 0) "$h ч $m мин" else "$m мин"
     }
 
     private fun confirmDelete(session: SleepSession) {

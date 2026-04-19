@@ -38,6 +38,13 @@
         android:textColor="?attr/colorPrimary"
         android:text="@string/add_manual" />
 
+    <include
+        android:id="@+id/today_stats"
+        layout="@layout/item_today_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +52,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="?android:attr/textColorPrimary"
-        android:paddingTop="16dp"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView

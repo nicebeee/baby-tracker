@@ -24,4 +24,9 @@
         android:name="com.babytracker.app.ui.diaper.DiaperFragment"
         android:label="@string/tab_diaper" />
 
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.babytracker.app.ui.statistics.StatisticsFragment"
+        android:label="@string/tab_statistics" />
+
 </navigation>

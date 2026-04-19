@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_diaper"
         android:title="@string/tab_diaper" />
 
+    <item
+        android:id="@+id/statisticsFragment"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/tab_statistics" />
+
 </menu>

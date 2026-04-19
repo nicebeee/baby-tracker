@@ -9,6 +9,9 @@ interface FeedingDao {
     @Query("SELECT * FROM feeding_sessions ORDER BY startTime DESC")
     fun getAll(): LiveData<List<FeedingSession>>
 
+    @Query("SELECT * FROM feeding_sessions WHERE startTime >= :from AND startTime < :to ORDER BY startTime DESC")
+    fun getByDay(from: Long, to: Long): LiveData<List<FeedingSession>>
+
     @Insert
     suspend fun insert(session: FeedingSession): Long
 

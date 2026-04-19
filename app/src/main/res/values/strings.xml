@@ -7,6 +7,7 @@
     <string name="tab_sleep">Сон</string>
     <string name="tab_weight">Вес</string>
     <string name="tab_diaper">Подгузник</string>
+    <string name="tab_statistics">Статистика</string>
 
     <!-- Feeding -->
     <string name="start_feeding">Начать кормление</string>

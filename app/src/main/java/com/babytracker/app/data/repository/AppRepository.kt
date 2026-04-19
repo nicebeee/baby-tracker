@@ -11,6 +11,9 @@ class AppRepository(
 ) {
     val allFeedings = feedingDao.getAll()
     val allSleeps = sleepDao.getAll()
+
+    fun feedingsByDay(from: Long, to: Long) = feedingDao.getByDay(from, to)
+    fun sleepsByDay(from: Long, to: Long) = sleepDao.getByDay(from, to)
     val allWeights = weightDao.getAll()
     val allDiapers = diaperDao.getAll()
 
