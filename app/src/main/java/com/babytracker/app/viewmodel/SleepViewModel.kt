@@ -1,6 +1,7 @@
 package com.babytracker.app.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.*
 import com.babytracker.app.data.database.AppDatabase
 import com.babytracker.app.data.entities.SleepSession
@@ -9,7 +10,6 @@ import kotlinx.coroutines.launch
 
 class SleepViewModel(app: Application) : AndroidViewModel(app) {
     private val repo: AppRepository
-
     val sessions: LiveData<List<SleepSession>>
 
     private val _isRunning = MutableLiveData(false)
@@ -21,15 +21,25 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
     private var startTimeMillis = 0L
     private var timerRunnable: Runnable? = null
     private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val prefs = app.getSharedPreferences("sleep_prefs", Context.MODE_PRIVATE)
 
     init {
         val db = AppDatabase.getInstance(app)
         repo = AppRepository(db.feedingDao(), db.sleepDao(), db.weightDao(), db.diaperDao())
         sessions = repo.allSleeps
+
+        // Восстанавливаем таймер если приложение было закрыто
+        val savedStart = prefs.getLong(KEY_START, 0L)
+        if (savedStart > 0L) {
+            startTimeMillis = savedStart
+            _isRunning.value = true
+            tickTimer()
+        }
     }
 
     fun startTimer() {
         startTimeMillis = System.currentTimeMillis()
+        prefs.edit().putLong(KEY_START, startTimeMillis).apply()
         _isRunning.value = true
         tickTimer()
     }
@@ -45,6 +55,7 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
     fun stopTimer() {
         val endTime = System.currentTimeMillis()
         handler.removeCallbacksAndMessages(null)
+        prefs.edit().remove(KEY_START).apply()
         _isRunning.value = false
         _elapsedMillis.value = 0L
         viewModelScope.launch {
@@ -64,5 +75,9 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
     override fun onCleared() {
         super.onCleared()
         handler.removeCallbacksAndMessages(null)
+    }
+
+    companion object {
+        private const val KEY_START = "sleep_start_time"
     }
 }
