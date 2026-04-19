@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Переопределяем основную тему как тёмную в ночном режиме -->
+    <style name="Theme.BabyTracker" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/brand_blue_light</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/brand_blue_dark</item>
+        <item name="colorOnPrimaryContainer">@color/brand_blue_light</item>
+        <item name="colorSecondary">@color/brand_blue_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorOnBackground">@color/on_surface_dark</item>
+        <item name="android:textColor">@color/on_surface_dark</item>
+        <item name="android:textColorHint">@color/on_surface_secondary_dark</item>
+        <item name="bottomNavigationStyle">@style/Widget.BabyTracker.BottomNavigation</item>
+    </style>
+</resources>
