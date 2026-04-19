@@ -36,6 +36,7 @@ class SleepViewModel(app: Application) : AndroidViewModel(app) {
             startTimeMillis = savedStart
             _isRunning.value = true
             tickTimer()
+            startService() // восстанавливаем уведомление после перезапуска
         }
     }
 

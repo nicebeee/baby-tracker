@@ -18,7 +18,11 @@ class TimerService : Service() {
             ACTION_START -> {
                 val type = intent.getStringExtra(EXTRA_TYPE) ?: TYPE_FEEDING
                 val startTime = intent.getLongExtra(EXTRA_START_TIME, System.currentTimeMillis())
-                startForeground(NOTIF_ID, buildNotification(type, startTime))
+                try {
+                    startForeground(NOTIF_ID, buildNotification(type, startTime))
+                } catch (e: Exception) {
+                    stopSelf()
+                }
             }
             ACTION_STOP -> {
                 stopForeground(STOP_FOREGROUND_REMOVE)
