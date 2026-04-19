@@ -37,7 +37,9 @@ class DiaperFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        viewModel.entries.observe(viewLifecycleOwner) { adapter.submitList(it) }
+        viewModel.entries.observe(viewLifecycleOwner) {
+            adapter.submitList(DiaperAdapter.buildGroupedList(it))
+        }
 
         binding.btnAddDiaper.setOnClickListener { showDiaperDialog(null) }
     }

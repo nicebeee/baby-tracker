@@ -40,7 +40,7 @@ class WeightFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         viewModel.entries.observe(viewLifecycleOwner) { entries ->
-            adapter.submitList(entries)
+            adapter.submitList(WeightAdapter.buildGroupedList(entries))
             updateChart(entries)
         }
 

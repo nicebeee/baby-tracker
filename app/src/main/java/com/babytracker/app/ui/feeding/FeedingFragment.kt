@@ -36,7 +36,9 @@ class FeedingFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        viewModel.sessions.observe(viewLifecycleOwner) { adapter.submitList(it) }
+        viewModel.sessions.observe(viewLifecycleOwner) {
+            adapter.submitList(FeedingAdapter.buildGroupedList(it))
+        }
 
         viewModel.isRunning.observe(viewLifecycleOwner) { running ->
             binding.btnToggleTimer.text = if (running) getString(R.string.stop_feeding) else getString(R.string.start_feeding)
