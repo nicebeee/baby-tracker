@@ -32,6 +32,9 @@ jobs:
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
 
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk baby-tracker.apk
+
       - name: Get version tag
         id: tag
         run: echo "tag=v$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
@@ -41,6 +44,8 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: "Baby Tracker ${{ steps.tag.outputs.tag }}"
-          body: "Автосборка от ${{ steps.tag.outputs.tag }}"
-          files: app/build/outputs/apk/debug/app-debug.apk
+          body: "Обновление Baby Tracker"
+          files: baby-tracker.apk
+          prerelease: false
+          draft: false
           make_latest: true
