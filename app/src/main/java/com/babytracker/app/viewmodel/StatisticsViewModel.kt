@@ -9,7 +9,10 @@ import com.babytracker.app.data.repository.AppRepository
 import java.util.Calendar
 
 class StatisticsViewModel(app: Application) : AndroidViewModel(app) {
-    private lateinit var repo: AppRepository
+    private val repo: AppRepository = run {
+        val db = AppDatabase.getInstance(app)
+        AppRepository(db.feedingDao(), db.sleepDao(), db.weightDao(), db.diaperDao())
+    }
 
     val selectedDate = MutableLiveData(startOfDay(System.currentTimeMillis()))
 
@@ -19,11 +22,6 @@ class StatisticsViewModel(app: Application) : AndroidViewModel(app) {
 
     val sleeps: LiveData<List<SleepSession>> = selectedDate.switchMap { date ->
         repo.sleepsByDay(date, date + DAY_MS)
-    }
-
-    init {
-        val db = AppDatabase.getInstance(app)
-        repo = AppRepository(db.feedingDao(), db.sleepDao(), db.weightDao(), db.diaperDao())
     }
 
     fun previousDay() {
