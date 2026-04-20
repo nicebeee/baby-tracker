@@ -99,11 +99,8 @@ class FeedingFragment : Fragment() {
         val todaySessions = sessions.filter { it.startTime >= todayStart }
         val count = todaySessions.size
         val totalMs = todaySessions.sumOf { it.endTime - it.startTime }
-        val statsView = binding.todayStats
-        statsView.findViewById<android.widget.TextView>(com.babytracker.app.R.id.tv_today_count).text =
-            "$count ${if (count == 1) "раз" else "раз"}"
-        statsView.findViewById<android.widget.TextView>(com.babytracker.app.R.id.tv_today_duration).text =
-            formatDur(totalMs)
+        binding.todayStats.tvTodayCount.text = "$count раз"
+        binding.todayStats.tvTodayDuration.text = formatDur(totalMs)
     }
 
     private fun formatDur(ms: Long): String {

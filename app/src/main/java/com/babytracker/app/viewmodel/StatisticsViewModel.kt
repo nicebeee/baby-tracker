@@ -9,7 +9,7 @@ import com.babytracker.app.data.repository.AppRepository
 import java.util.Calendar
 
 class StatisticsViewModel(app: Application) : AndroidViewModel(app) {
-    private val repo: AppRepository
+    private lateinit var repo: AppRepository
 
     val selectedDate = MutableLiveData(startOfDay(System.currentTimeMillis()))
 
